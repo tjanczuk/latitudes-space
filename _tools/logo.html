@@ -1,0 +1,81 @@
+<html>
+<head>
+    <title>Latitudes logo</title>
+    
+    <style type="text/css">
+      /*canvas { border: 1px solid black; }*/
+      /*body { background: red }*/
+    </style>
+</head>
+<body>
+    <canvas id="logo2"></canvas>
+    <p id="url2"></p>
+    <canvas id="logo3"></canvas>
+    <p id="url3"></p>
+    <script>
+        
+        var pad = 10;
+        var w = 260;
+        var h = 80;
+        var backColor = "#a00000";
+        var textColor = "#fffff8";
+        var font = (h - 2 * pad) + 'px et-bembo';
+
+        var ratio = window.devicePixelRatio;
+
+        // Full logo
+ 
+        // The ration magic: http://www.html5rocks.com/en/tutorials/canvas/hidpi/
+        var canvas = document.getElementById('logo2');
+        canvas.width = w * ratio;
+        canvas.height = h * ratio;
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+
+        var ctx = canvas.getContext('2d');
+        ctx.scale(ratio, ratio);
+
+        ctx.fillStyle = backColor;
+        ctx.strokeStyle = backColor;
+        ctx.fillRect(0,0,w,h);
+        ctx.strokeRect(0,0,w,h);
+
+        ctx.font = font;
+        ctx.fillStyle = textColor;
+        ctx.strokeStyle = textColor;
+        ctx.textBaseline = 'middle';
+        ctx.textAlign = 'center'
+        ctx.fillText("Latitudes", w/2, h/2);
+
+        var png = canvas.toDataURL('image/png');
+        document.getElementById('url2').innerHTML = 
+            'Length: ' + png.length + ', <a href="' + png + '">link</a>';
+
+        // Small logo
+
+        canvas = document.getElementById('logo3');
+        canvas.width = h * ratio;
+        canvas.height = h * ratio;
+        canvas.style.width = h + 'px';
+        canvas.style.height = h + 'px';
+
+        var ctx = canvas.getContext('2d');
+        ctx.scale(ratio, ratio);
+
+        ctx.fillStyle = backColor;
+        ctx.strokeStyle = backColor;
+        ctx.fillRect(0,0,h,h);
+        ctx.strokeRect(0,0,h,h);
+
+        ctx.font = font;
+        ctx.fillStyle = textColor;
+        ctx.strokeStyle = textColor;
+        ctx.textBaseline = 'middle';
+        ctx.textAlign = 'center'
+        ctx.fillText("L", h/2, h/2);
+
+        png = canvas.toDataURL('image/png');
+        document.getElementById('url3').innerHTML = 
+            'Length: ' + png.length + ', <a href="' + png + '">link</a>';
+    </script></body>
+</html>
